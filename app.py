@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
 import os
-from myWeb3 import interactWithSmartContract
+from myWeb3 import insertEventInSmartContract
 
 app = Flask(__name__)
 
@@ -17,7 +17,7 @@ def helloWorld():
 
 @app.route('/interact',methods=['GET'])
 def connect():
-    interactWithSmartContract()
+    insertEventInSmartContract()
     return "ok ji"
 
 
