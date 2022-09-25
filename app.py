@@ -15,15 +15,14 @@ def helloWorld():
     if request.method == 'GET':
         return "Hello World!"
 
-@app.route('/interact',methods=['GET'])
-def connect():
+@app.route('/trigger-event', methods=['POST'])
+def trigger():
+    # Request.data me se samaan nikalna h, timestamp, id, database, collection, document
+    # is function me as parameter bhejna h (json bhejdiyo)
+    print(request.data)
     insertEventInSmartContract()
     return "ok ji"
 
-@app.route('/trigger-event', methods=['POST'])
-def trigger():
-    print(request.data)
-    return "done"
 
 
 

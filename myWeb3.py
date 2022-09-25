@@ -102,20 +102,89 @@ lotteryAbi = [
     },
 ]
 lotteryAddress="0xaB9858163DeC63663bEb6C5Fc697ca12e97Be26e"
-def interactWithSmartContract ():
-    print("inside interactWithSmartContract function")
+
+contractAbi = [
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "eventt",
+                "type": "uint256"
+            }
+        ],
+        "name": "insertEntry",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "transcationData",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "operation",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
+contractAddress = "0x66c3Aa6F43061fa81380940Fc4Bd05809E7Ba2BE"
+
+userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
+
+def insertEventInSmartContract():
+    print("inside insertion functionfunction")
     web3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v3/b85e8248ce5548038da1ccb22100b77a"))
     web3.middleware_onion.inject(geth_poa_middleware, layer=0)
-    print(web3.isConnected())
-    # print("Completed")
-    # balance = web3.eth.get_balance("0xE0f5Ef3120ad5d012112eca9792a151230C8cEab")
-    lotteryContract = web3.eth.contract(address=lotteryAddress, abi=lotteryAbi)
-    print(lotteryContract)
-    lotteryId = lotteryContract.functions.lotteryId().call()
-    print("ID: " + str(lotteryId))
-    history = lotteryContract.functions.lotteryHistory(lotteryId).call()
-    print(history)
-    potAmount = lotteryContract.functions.getBalance().call()
-    print(potAmount)
-    players =lotteryContract.functions.getPlayers().call()
-    print(players)
+    print("is connected? : " + str(web3.isConnected()))
+
+    provContract = web3.eth.contract(address=contractAddress, abi=contractAbi)
+    print(provContract)
+    tx_hash = provContract.functions.insertEntry(1).transact()
+    print(tx_hash)
+    web3.eth.waitForTransactionReceipt(tx_hash)
+    print("entered in blockchain")
+    # one for address, second for entry
+    
+
+def retrieveBlockChainData():
+    web3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v3/b85e8248ce5548038da1ccb22100b77a"))
+    web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+    provContract = web3.eth.contract(address=contractAddress, abi=contractAbi)
+    finalList = provContract.functions.transcationData(userAddress,2).call()
+    print("after finallist")
+    print(type(finalList))
+    print(finalList)
+
+
+# def interactWithSmartContract ():
+#     print("inside interactWithSmartContract function")
+#     web3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v3/b85e8248ce5548038da1ccb22100b77a"))
+#     web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+#     print(web3.isConnected())
+#     # print("Completed")
+#     # balance = web3.eth.get_balance("0xE0f5Ef3120ad5d012112eca9792a151230C8cEab")
+#     lotteryContract = web3.eth.contract(address=lotteryAddress, abi=lotteryAbi)
+#     print(lotteryContract)
+#     lotteryId = lotteryContract.functions.lotteryId().call()
+#     print("ID: " + str(lotteryId))
+#     history = lotteryContract.functions.lotteryHistory(lotteryId).call()
+#     print(history)
+#     potAmount = lotteryContract.functions.getBalance().call()
+#     print(potAmount)
+#     players =lotteryContract.functions.getPlayers().call()
+#     print(players)
