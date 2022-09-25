@@ -20,6 +20,11 @@ def connect():
     interactWithSmartContract()
     return "ok ji"
 
+@app.route('/trigger-event', methods=['POST'])
+def trigger():
+    print(request.data)
+    return "done"
+
 
 
 if __name__ == "__main__":
