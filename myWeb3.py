@@ -62,7 +62,7 @@ class CustomWeb3:
         gasPriceHex = self.webObject.toHex(gasPrice)
         # gasLimitHex = self.webObject.toHex(3000000)
         try:
-            transaction = self.provContract.functions.insertEntry(7).buildTransaction({
+            transaction = self.provContract.functions.insertEntry(12).buildTransaction({
                 # "gas": ??????
                 "gasPrice": gasPriceHex,
                 # "gasLimit": gasLimitHex,          error dera
@@ -82,7 +82,7 @@ class CustomWeb3:
 
     def retrieveBlockChainData(self):
         finalList=[]
-        for i in range(0,4):
+        for i in range(0,6):
             var = self.provContract.functions.transcationData(userAddress,i).call()
             finalList.append(var)
         print("after finallist")

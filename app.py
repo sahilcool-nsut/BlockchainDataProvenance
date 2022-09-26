@@ -4,7 +4,7 @@ from web3.middleware import geth_poa_middleware
 import os
 from myWeb3 import CustomWeb3
 import json
-import mongoDBDriver
+from mongoDBDriver import insertOne
 app = Flask(__name__)
 
 customWeb3 = CustomWeb3()
@@ -28,7 +28,7 @@ def helloWorld():
 
 
 @app.route('/insertDataDB', methods=['POST'])
-async def insertDataDB():
+def insertDataDB():
     if request.method == 'POST':
 
         name = request.form.get('name')
@@ -36,9 +36,10 @@ async def insertDataDB():
         print(name)
         print(rollno)
         try:
-            await mongoDBDriver.insertOne({"name":name,"rollNo":rollno})
+            insertOne({"name":name,"rollNo":rollno})
             return render_template('addData.html',messages={"dataAdded":"true"})
-        except:
+        except Exception as e:
+            print(e)
             return render_template('addData.html',messages={"dataAdded":"false"})
         
 
