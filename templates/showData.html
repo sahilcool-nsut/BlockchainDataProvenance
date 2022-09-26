@@ -19,9 +19,23 @@
     </div>
     <div class="main">
         
-        <h2>Data Provenance using Blockchain for Cloud Databases</h2>
+        <h2>Show Data</h1>
+        <h3>Retrieve Transaction Data stored on the Blockchain</h2>
         
-        
+        <form action = "http://localhost:5000/getData" method = "GET" 
+         enctype = "multipart/form-data">
+            
+            <br>
+            <input value="Get Data" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>
+        </form>
+        <p>
+            <div id="loading" style="display:none;">
+                <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" height="35px" width="35px">
+            </div>
+        </p>
+        <p id="retrievedData">
+            {{ messages['data'] }}
+        </p>
     </div>
 </body>
 </html>

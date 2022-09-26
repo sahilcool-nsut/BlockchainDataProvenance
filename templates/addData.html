@@ -20,8 +20,24 @@
     <div class="main">
         
         <h2>Data Provenance using Blockchain for Cloud Databases</h2>
-        
-        
+
+        <form action = "http://localhost:5000/insertDataDB" method = "POST" 
+         enctype = "multipart/form-data">
+            <label for="fname">Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="rollno">Roll No: </label>
+            <input type="text" id="rollno" name="rollno">
+            <br>
+            <input value="Insert Data in DB" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>
+        </form>
+        <p>
+            <div id="loading" style="display:none;">
+                <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" height="35px" width="35px">
+            </div>
+        </p>
+        <p>
+            {{messages['dataAdded']}}
+        </p>
     </div>
 </body>
 </html>

@@ -2,35 +2,67 @@ from flask import Flask, request, jsonify, render_template
 from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
 import os
-from myWeb3 import insertEventInSmartContract
+from myWeb3 import CustomWeb3
 import json
-
+import mongoDBDriver
 app = Flask(__name__)
+
+customWeb3 = CustomWeb3()
 
 @app.route("/")
 def index():
     return render_template('home.html')
+
+@app.route("/showData")
+def showData():
+    return render_template('showData.html',messages={})
+
+@app.route("/addData")
+def addDataPage():
+    return render_template('addData.html',messages={})
 
 @app.route('/helloWorld', methods=['GET'])
 def helloWorld():
     if request.method == 'GET':
         return "Hello World!"
 
+
+@app.route('/insertDataDB', methods=['POST'])
+async def insertDataDB():
+    if request.method == 'POST':
+
+        name = request.form.get('name')
+        rollno = request.form.get('rollno')
+        print(name)
+        print(rollno)
+        try:
+            await mongoDBDriver.insertOne({"name":name,"rollNo":rollno})
+            return render_template('addData.html',messages={"dataAdded":"true"})
+        except:
+            return render_template('addData.html',messages={"dataAdded":"false"})
+        
+
 @app.route('/trigger-event', methods=['POST'])
 def trigger():
-    # Request.data me se samaan nikalna h, timestamp, id, database, collection, document
-    # is function me as parameter bhejna h (json bhejdiyo)
     payload = request.data.decode('utf-8')
 
     payloadObj = json.loads(payload)
 
     data = payloadObj['changeEvent']
 
-    insertEventInSmartContract(data)
+    customWeb3.insertEventInSmartContract(data)
     return "ok ji"
 
 
+@app.route('/interactTest', methods=['GET'])
+def interactTest():
+    customWeb3.insertEventInSmartContract()
+    return "ok ji"
 
+@app.route('/getData', methods=['GET'])
+def getData():
+    finalData = customWeb3.retrieveBlockChainData()
+    return render_template('showData.html',messages={"data":finalData})
 
 if __name__ == "__main__":
     app.run(debug=True)
