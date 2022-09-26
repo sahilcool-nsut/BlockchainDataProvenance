@@ -146,7 +146,9 @@ contractAddress = "0x66c3Aa6F43061fa81380940Fc4Bd05809E7Ba2BE"
 
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
-def insertEventInSmartContract():
+def insertEventInSmartContract(data):
+    print(data)
+    return "data printed successfully"
     print("inside insertion functionfunction")
     web3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v3/b85e8248ce5548038da1ccb22100b77a"))
     web3.middleware_onion.inject(geth_poa_middleware, layer=0)
