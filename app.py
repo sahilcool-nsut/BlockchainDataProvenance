@@ -66,10 +66,10 @@ def getData():
     return render_template('showData.html',messages={"data":finalData})
 
 
-# @app.route('/clearData', methods=['GET'])
-# def getData():
-#     customWeb3.clearBlockChainData()
-#     return render_template('showData.html',messages={"data":finalData})
+@app.route('/clearData', methods=['GET'])
+def clearData():
+    customWeb3.clearBlockChainData()
+    return render_template('home.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
