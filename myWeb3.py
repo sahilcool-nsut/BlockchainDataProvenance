@@ -220,9 +220,10 @@ class CustomWeb3:
             print(type(transactionHash))
             print(transactionHash)
             print(self.webObject.toHex(transactionHash))
+            print(str(self.webObject.toHex(transactionHash)))
             # Now create new transaction to store the transaction hash
             # First get the index from the timestamp->index mapping
-            transaction2 = self.provContract.functions.updateTransactionHash(timeStamp,str(transactionHash)).buildTransaction({
+            transaction2 = self.provContract.functions.updateTransactionHash(timeStamp,str(self.webObject.toHex(transactionHash))).buildTransaction({
                 "gasPrice": gasPriceHex,
                 "from": userAddress,
                 "nonce":nonce
