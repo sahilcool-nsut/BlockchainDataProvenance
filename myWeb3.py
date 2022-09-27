@@ -179,9 +179,28 @@ class CustomWeb3:
 
     def retrieveBlockChainData(self):
         finalList=[]
-        for i in range(0,6):
-            var = self.provContract.functions.transcationData(userAddress,i).call()
-            finalList.append(var)
+        # listLength = self.provContract.functions.Sizee().call()
+        # print(listLength)
+        # for i in range(0,listLength):
+        #     var = self.provContract.functions.transactionData(userAddress,i).call()
+        #     var.insert(0,i+1)
+        #     print(var)
+        #     finalList.append(var)
+        # for i in range(0,6):
+        var = self.provContract.functions.transactionData(userAddress,0).call()
+        var.insert(0,1)
+        print(var)
+        
+        finalList.append(var)
+        var = self.provContract.functions.transactionData(userAddress,1).call()
+        var.insert(0,2)
+        print(var)
+        finalList.append(var)
+        var = self.provContract.functions.transactionData(userAddress,2).call()
+        var.insert(0,3)
+        print(var)
+        finalList.append(var)
+        #     finalList.append(var)
         print("after finallist")
         print(type(finalList))
         print(finalList)

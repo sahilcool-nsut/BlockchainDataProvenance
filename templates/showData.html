@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/customStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
     
-    
     <title>SecureProv</title>
 </head> 
 <body>
@@ -34,7 +33,26 @@
             </div>
         </p>
         <p id="retrievedData">
-            {{ messages['data'] }}
+            <table>
+                {% if messages['data']|length > 0 %}
+                <tr>
+                    <th>S.No.</th>
+                    <th>Timestamp</th>
+                    <th>Database Used</th>
+                    <th>Collection Used</th>
+                    <th>Operation</th>
+                </tr>
+                {% endif %}
+                {%for row in messages['data']%}
+                    
+                   <tr>
+                      {%for col in row%}
+                        <td>{{col}}</td>
+                      {%endfor%}
+                   </tr>
+                {%endfor%}
+              </table>
+            <!-- {{ messages['data'] }} -->
         </p>
     </div>
 </body>

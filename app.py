@@ -6,7 +6,7 @@ from myWeb3 import CustomWeb3
 import json
 from mongoDBDriver import insertOne
 app = Flask(__name__)
-
+app.config["TEMPLATES_AUTO_RELOAD"]=True
 customWeb3 = CustomWeb3()
 
 @app.route("/")

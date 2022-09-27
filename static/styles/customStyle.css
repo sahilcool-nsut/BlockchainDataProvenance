@@ -11,8 +11,6 @@ table{
     border-radius: 10px;
 }
 th{
-    background-color: #111;
-    color:#FFFFFF;
     text-align:center;
 }
 th:first-of-type {
