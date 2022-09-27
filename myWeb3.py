@@ -119,25 +119,6 @@ contractAbi = [
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "timeStampIndex",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
@@ -180,7 +161,7 @@ contractAbi = [
 		"type": "function"
 	}
 ]
-contractAddress = "0xf070b23A29F776bd57bE262187499c6953c4e4D2"
+contractAddress = "0x385cd8Fc9EFf56a027E4b0DBEe4E98278b9f63E1"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 class CustomWeb3:
@@ -243,12 +224,17 @@ class CustomWeb3:
         finalList=[]
         listLength = self.provContract.functions.Sizee(userAddress).call()
         print(listLength)
+        urlsList=[]
         for i in range(0,listLength):
             var = self.provContract.functions.transactionData(userAddress,i).call()
+            txHash = var[len(var)-1]        #Last entry is the hash
+            txLink = "https://rinkeby.etherscan.io/tx/" + txHash
+            urlsList.append(txLink)    
             var.insert(0,i+1)
             print(var)
             finalList.append(var)
-        return finalList
+        print(urlsList)
+        return finalList,urlsList
 
     def clearBlockChainData(self):
         privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39" 

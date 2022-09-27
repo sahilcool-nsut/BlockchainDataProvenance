@@ -62,8 +62,8 @@ def interactTest():
 
 @app.route('/getData', methods=['GET'])
 def getData():
-    finalData = customWeb3.retrieveBlockChainData()
-    return render_template('showData.html',messages={"data":finalData})
+    finalData,urlsList = customWeb3.retrieveBlockChainData()
+    return render_template('showData.html',messages={"data":finalData,"urlsList":urlsList})
 
 
 @app.route('/clearData', methods=['GET'])
