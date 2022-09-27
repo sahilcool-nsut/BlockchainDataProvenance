@@ -94,7 +94,7 @@ contractAbi = [
 		],
 		"name": "updateTransactionHash",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -161,7 +161,7 @@ contractAbi = [
 		"type": "function"
 	}
 ]
-contractAddress = "0x385cd8Fc9EFf56a027E4b0DBEe4E98278b9f63E1"
+contractAddress = "0xBE94fBAe396126c82e901F9ec302b2aE31Fd0fD3"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 class CustomWeb3:
