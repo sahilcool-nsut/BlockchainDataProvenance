@@ -206,6 +206,7 @@ class CustomWeb3:
         print(type(strTransactionHash))
         # Now create new transaction to store the transaction hash
         # First get the index from the timestamp->index mapping
+        tx_receipt = self.webObject.eth.waitForTransactionReceipt(transactionHash, timeout=120, poll_latency=0.1)
         self.updateHash(timeStamp,strTransactionHash)
     def updateHash(self,timeStamp,strTransactionHash):
         gasPrice = self.webObject.eth.gasPrice
