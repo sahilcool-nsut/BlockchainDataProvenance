@@ -3,47 +3,136 @@ from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
 import json
 
+# contractAbi = [
+#     {
+#         "inputs": [
+#             {
+#                 "internalType": "uint256",
+#                 "name": "eventt",
+#                 "type": "uint256"
+#             }
+#         ],
+#         "name": "insertEntry",
+#         "outputs": [],
+#         "stateMutability": "payable",
+#         "type": "function"
+#     },
+#     {
+#         "inputs": [
+#             {
+#                 "internalType": "address",
+#                 "name": "",
+#                 "type": "address"
+#             },
+#             {
+#                 "internalType": "uint256",
+#                 "name": "",
+#                 "type": "uint256"
+#             }
+#         ],
+#         "name": "transcationData",
+#         "outputs": [
+#             {
+#                 "internalType": "uint256",
+#                 "name": "operation",
+#                 "type": "uint256"
+#             }
+#         ],
+#         "stateMutability": "view",
+#         "type": "function"
+#     }
+# ]
+# contractAddress = "0x66c3Aa6F43061fa81380940Fc4Bd05809E7Ba2BE"
 contractAbi = [
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "eventt",
-                "type": "uint256"
-            }
-        ],
-        "name": "insertEntry",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "transcationData",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "operation",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
+	{
+		"inputs": [],
+		"name": "Sizee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "clearList",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "eventt",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "timeStamp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dbName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "clusterName",
+				"type": "string"
+			}
+		],
+		"name": "insertEntry",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "transactionData",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "timeStp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "DBName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ClusName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "operation",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ]
-contractAddress = "0x66c3Aa6F43061fa81380940Fc4Bd05809E7Ba2BE"
-
+contractAddress = "0xe82f8615522f44df9B7c4904a1ec92Fa8Ea48b3f"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 class CustomWeb3:
@@ -54,15 +143,23 @@ class CustomWeb3:
         self.provContract = self.webObject.eth.contract(address=contractAddress, abi=contractAbi)
         
 
-    def insertEventInSmartContract(self,):
+    def insertEventInSmartContract(self,data):
     
+        operationType = data["operationType"]
+        timeStamp = data["clusterTime"]["$timestamp"]["t"]
+        dbUsed = data["ns"]["db"]
+        collectionUsed = data["ns"]["coll"]
+        print(operationType)
+        print(timeStamp)
+        print(dbUsed)
+        print(collectionUsed)
         privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39" 
         nonce = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
         # gasLimitHex = self.webObject.toHex(3000000)
         try:
-            transaction = self.provContract.functions.insertEntry(12).buildTransaction({
+            transaction = self.provContract.functions.insertEntry(operationType,timeStamp,dbUsed,collectionUsed).buildTransaction({
                 # "gas": ??????
                 "gasPrice": gasPriceHex,
                 # "gasLimit": gasLimitHex,          error dera
