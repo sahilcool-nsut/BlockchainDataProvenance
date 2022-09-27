@@ -145,10 +145,10 @@ class CustomWeb3:
 
     def insertEventInSmartContract(self,data):
     
-        operationType = data["operationType"]
-        timeStamp = data["clusterTime"]["$timestamp"]["t"]
-        dbUsed = data["ns"]["db"]
-        collectionUsed = data["ns"]["coll"]
+        operationType = str(data["operationType"])
+        timeStamp = str(data["clusterTime"]["$timestamp"]["t"])
+        dbUsed = str(data["ns"]["db"])
+        collectionUsed = str(data["ns"]["coll"])
         print(operationType)
         print(timeStamp)
         print(dbUsed)
