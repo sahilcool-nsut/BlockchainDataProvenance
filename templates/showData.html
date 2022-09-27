@@ -53,7 +53,7 @@
                         {{ rowloop.index0 }}
                         {{ row|length }} -->
                         {% if loop.index == row|length %}
-                            <td><a href="{{ messages['urlsList'][rowloop.index0] }}">{{col}}</a></td>
+                            <td><a href="{{ messages['urlsList'][rowloop.index0] }}" target = "_blank">{{col}}</a></td>
                         {% else %}
                             <td>{{col}}</td>
                         {% endif %}
