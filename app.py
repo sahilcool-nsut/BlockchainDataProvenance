@@ -51,8 +51,8 @@ def trigger():
 
     data = payloadObj['changeEvent']
 
-    # customWeb3.insertEventInSmartContract(data)
-    customWeb3.updateHash(data)
+    customWeb3.insertEventInSmartContract(data)
+    # customWeb3.updateHash(data)
     return "ok ji"
 
 
