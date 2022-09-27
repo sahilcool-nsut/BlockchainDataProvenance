@@ -44,7 +44,7 @@ def insertDataDB():
         
 
 @app.route('/trigger-event', methods=['POST'])
-def trigger(data):
+def trigger():
     payload = request.data.decode('utf-8')
 
     payloadObj = json.loads(payload)
