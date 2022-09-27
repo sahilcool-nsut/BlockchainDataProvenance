@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Include Bootstrap and Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/customStyle.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
     
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/customStyle.css') }}">
     
     <title>SecureProv</title>
 </head> 
@@ -14,19 +14,31 @@
     <div class="sidenav">
         <div class="sidenav-title"> SecureProv </div>
         <br>
-        <a href="/showData"> - Retrieve Transaction Data</a>
+        <a href="/showData"> - Retrieve Transactions</a>
         <a href="/addData"> - Insert Data</a>
     </div>
     <div class="main">
         
-        <h2>Data Provenance using Blockchain for Cloud Databases</h2>
+        <h2>Insert Data in DB</h2>
 
+        <p>This is created for portraying a demo of the system.
+            <br>
+            <br>
+            Using the below form, you can insert a <b>dummy entry</b> in the database, and once it is inserted, the database trigger should be called.
+            <br>
+            The trigger will call the backend APIs and insert the provenance data in the blockchain.
+            <br>
+            You can go to the <b>"Retrieve Transaction"</b> page to check if the action was captured and stored in the blockchain.
+        </p>
         <form action = "https://blockchain-dataprovenance.herokuapp.com/insertDataDB" method = "POST" 
          enctype = "multipart/form-data">
             <label for="fname">Name:</label>
             <input type="text" id="name" name="name">
+            <br>
+            <br>
             <label for="rollno">Roll No: </label>
             <input type="text" id="rollno" name="rollno">
+            <br>
             <br>
             <input value="Insert Data in DB" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>
         </form>

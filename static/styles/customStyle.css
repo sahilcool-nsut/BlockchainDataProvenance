@@ -1,16 +1,19 @@
 body{
     background-color:#F6FbFb;
 }
-table, th, td {
+table, td {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 8px;
     background-color:#FFFFFF;
+    text-align:center;
 }
 table{
     border-radius: 10px;
 }
 th{
+    border: 1px solid black;
+    padding:8px;
     text-align:center;
 }
 th:first-of-type {
@@ -28,6 +31,7 @@ tr:last-of-type td:last-of-type {
 td{
     max-width:100%;
     white-space:nowrap;
+    border-width:0
 }
 hr.solid{
     border: 0;

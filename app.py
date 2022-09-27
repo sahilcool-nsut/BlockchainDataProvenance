@@ -37,10 +37,10 @@ def insertDataDB():
         print(rollno)
         try:
             insertOne({"name":name,"rollNo":rollno})
-            return render_template('addData.html',messages={"dataAdded":"true"})
+            return render_template('addData.html',messages={"dataAdded":"Data Added Successfully"})
         except Exception as e:
             print(e)
-            return render_template('addData.html',messages={"dataAdded":"false"})
+            return render_template('addData.html',messages={"dataAdded":"Something went wrong"})
         
 
 @app.route('/trigger-event', methods=['POST'])
