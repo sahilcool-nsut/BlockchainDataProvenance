@@ -46,19 +46,6 @@ import json
 contractAbi = [
 	{
 		"inputs": [],
-		"name": "Sizee",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "clearList",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -90,6 +77,25 @@ contractAbi = [
 		"name": "insertEntry",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
+			}
+		],
+		"name": "Sizee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -132,7 +138,7 @@ contractAbi = [
 		"type": "function"
 	}
 ]
-contractAddress = "0xe82f8615522f44df9B7c4904a1ec92Fa8Ea48b3f"
+contractAddress = "0x7c0bf36eB7129c038Ef20F683eb94c453900135E"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 class CustomWeb3:
@@ -179,35 +185,13 @@ class CustomWeb3:
 
     def retrieveBlockChainData(self):
         finalList=[]
-        listLength = self.provContract.functions.Sizee().call()
+        listLength = self.provContract.functions.Sizee(userAddress).call()
         print(listLength)
-        # for i in range(0,listLength):
-        #     var = self.provContract.functions.transactionData(userAddress,i).call()
-        #     var.insert(0,i+1)
-        #     print(var)
-        #     finalList.append(var)
-        # for i in range(0,6):
-        var = self.provContract.functions.transactionData(userAddress,0).call()
-        var.insert(0,1)
-        print(var)
-        
-        finalList.append(var)
-        var = self.provContract.functions.transactionData(userAddress,1).call()
-        var.insert(0,2)
-        print(var)
-        finalList.append(var)
-        var = self.provContract.functions.transactionData(userAddress,2).call()
-        var.insert(0,3)
-        print(var)
-        finalList.append(var)
-        var = self.provContract.functions.transactionData(userAddress,3).call()
-        var.insert(0,4)
-        print(var)
-        finalList.append(var)
-        #     finalList.append(var)
-        print("after finallist")
-        print(type(finalList))
-        print(finalList)
+        for i in range(0,listLength):
+            var = self.provContract.functions.transactionData(userAddress,i).call()
+            var.insert(0,i+1)
+            print(var)
+            finalList.append(var)
         return finalList
 
 

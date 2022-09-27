@@ -11,7 +11,7 @@
 </head> 
 <body>
     <div class="sidenav">
-        <div class="sidenav-title"> SecureProv </div>
+        <a style = "padding-left:0px;" href="/"><div class="sidenav-title"> SecureProv </div></a>
         <br>
         <a href="/showData"> - Retrieve Transactions</a>
         <a href="/addData"> - Insert Data</a>
@@ -21,8 +21,8 @@
         <h2>Show Data</h1>
         <p>Retrieve Transaction Data stored on the Blockchain</p>
         <p>On pressing the button below, you can get the transaction data stored <b>live on the blockchain network</b></p>
-        
-        <form action = "https://blockchain-dataprovenance.herokuapp.com/getData" method = "GET" 
+        <form action="https://blockchain-dataprovenance.herokuapp.com/getData"></form>
+        <!-- <form action = "http://localhost:5000/getData" method = "GET"  -->
          enctype = "multipart/form-data">
             
             <br>
