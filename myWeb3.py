@@ -82,12 +82,49 @@ contractAbi = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "timeStamp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tHash",
+				"type": "string"
+			}
+		],
+		"name": "updateTransactionHash",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "userAddress",
 				"type": "address"
 			}
 		],
 		"name": "Sizee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "timeStampIndex",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -132,13 +169,18 @@ contractAbi = [
 				"internalType": "string",
 				"name": "operation",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tranHash",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	}
 ]
-contractAddress = "0x7c0bf36eB7129c038Ef20F683eb94c453900135E"
+contractAddress = "0xf070b23A29F776bd57bE262187499c6953c4e4D2"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 class CustomWeb3:
@@ -166,9 +208,7 @@ class CustomWeb3:
         # gasLimitHex = self.webObject.toHex(3000000)
         try:
             transaction = self.provContract.functions.insertEntry(operationType,timeStamp,dbUsed,collectionUsed).buildTransaction({
-                # "gas": ??????
                 "gasPrice": gasPriceHex,
-                # "gasLimit": gasLimitHex,          error dera
                 "from": userAddress,
                 "nonce":nonce
             }) 
@@ -176,8 +216,23 @@ class CustomWeb3:
             signedTxn = self.webObject.eth.account.signTransaction(transaction, private_key=privateKey)
             print("signed transaction")
             transactionHash = self.webObject.eth.sendRawTransaction(signedTxn.rawTransaction)
-            print("sent transaction")
+            print("sent transaction1")
+            print(type(transactionHash))
+            print(transactionHash)
             print(self.webObject.toHex(transactionHash))
+            # Now create new transaction to store the transaction hash
+            # First get the index from the timestamp->index mapping
+            transaction2 = self.provContract.functions.updateTransactionHash(timeStamp,str(transactionHash)).buildTransaction({
+                "gasPrice": gasPriceHex,
+                "from": userAddress,
+                "nonce":nonce
+            }) 
+            print("created transaction2 object")
+            signedTxn2 = self.webObject.eth.account.signTransaction(transaction2, private_key=privateKey)
+            print("signed transaction2")
+            transactionHash2 = self.webObject.eth.sendRawTransaction(signedTxn2.rawTransaction)
+            print("sent transaction2")
+            print(self.webObject.toHex(transactionHash2))
         except Exception as e:
             print(e)
         # one for address, second for entry
@@ -194,5 +249,24 @@ class CustomWeb3:
             finalList.append(var)
         return finalList
 
-
+    def clearBlockChainData(self):
+        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39" 
+        nonce = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
+        gasPrice = self.webObject.eth.gasPrice
+        gasPriceHex = self.webObject.toHex(gasPrice)
+        # gasLimitHex = self.webObject.toHex(3000000)
+        try:
+            transaction = self.provContract.functions.clearList().buildTransaction({
+                "gasPrice": gasPriceHex,
+                "from": userAddress,
+                "nonce":nonce
+            }) 
+            print("created transaction object")
+            signedTxn = self.webObject.eth.account.signTransaction(transaction, private_key=privateKey)
+            print("signed transaction")
+            transactionHash = self.webObject.eth.sendRawTransaction(signedTxn.rawTransaction)
+            print("sent transaction")
+            print(self.webObject.toHex(transactionHash))
+        except Exception as e:
+            print(e)
 
