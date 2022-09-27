@@ -187,39 +187,39 @@ class CustomWeb3:
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
         # gasLimitHex = self.webObject.toHex(3000000)
-        try:
-            transaction = self.provContract.functions.insertEntry(operationType,timeStamp,dbUsed,collectionUsed).buildTransaction({
-                "gasPrice": gasPriceHex,
-                "from": userAddress,
-                "nonce":nonce
-            }) 
-            print("created transaction object")
-            signedTxn = self.webObject.eth.account.signTransaction(transaction, private_key=privateKey)
-            print("signed transaction")
-            transactionHash = self.webObject.eth.sendRawTransaction(signedTxn.rawTransaction)
-            print("sent transaction1")
-            print(type(transactionHash))
-            print(transactionHash)
-            print(self.webObject.toHex(transactionHash))
-            print(str(self.webObject.toHex(transactionHash)))
-            strTransactionHash = str(self.webObject.toHex(transactionHash))
-            print(type(strTransactionHash))
-            # Now create new transaction to store the transaction hash
-            # First get the index from the timestamp->index mapping
-            nonce2 = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
-            transaction2 = self.provContract.functions.updateTransactionHash(timeStamp,strTransactionHash).buildTransaction({
-                "gasPrice": gasPriceHex,
-                "from": userAddress,
-                "nonce":nonce2
-            }) 
-            print("created transaction2 object")
-            signedTxn2 = self.webObject.eth.account.signTransaction(transaction2, private_key=privateKey)
-            print("signed transaction2")
-            transactionHash2 = self.webObject.eth.sendRawTransaction(signedTxn2.rawTransaction)
-            print("sent transaction2")
-            print(self.webObject.toHex(transactionHash2))
-        except Exception as e:
-            print(e)
+        # try:
+        transaction = self.provContract.functions.insertEntry(operationType,timeStamp,dbUsed,collectionUsed).buildTransaction({
+            "gasPrice": gasPriceHex,
+            "from": userAddress,
+            "nonce":nonce
+        }) 
+        print("created transaction object")
+        signedTxn = self.webObject.eth.account.signTransaction(transaction, private_key=privateKey)
+        print("signed transaction")
+        transactionHash = self.webObject.eth.sendRawTransaction(signedTxn.rawTransaction)
+        print("sent transaction1")
+        print(type(transactionHash))
+        print(transactionHash)
+        print(self.webObject.toHex(transactionHash))
+        print(str(self.webObject.toHex(transactionHash)))
+        strTransactionHash = str(self.webObject.toHex(transactionHash))
+        print(type(strTransactionHash))
+        # Now create new transaction to store the transaction hash
+        # First get the index from the timestamp->index mapping
+        nonce2 = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
+        transaction2 = self.provContract.functions.updateTransactionHash(timeStamp,strTransactionHash).buildTransaction({
+            "gasPrice": gasPriceHex,
+            "from": userAddress,
+            "nonce":nonce2
+        }) 
+        print("created transaction2 object")
+        signedTxn2 = self.webObject.eth.account.signTransaction(transaction2, private_key=privateKey)
+        print("signed transaction2")
+        transactionHash2 = self.webObject.eth.sendRawTransaction(signedTxn2.rawTransaction)
+        print("sent transaction2")
+        print(self.webObject.toHex(transactionHash2))
+        # except Exception as e:
+        #     print(e)
         # one for address, second for entry
         
 
