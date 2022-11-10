@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include Bootstrap and Custom CSS -->
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/customStyle.css') }}">
+    
+    <title>SecureProv</title>
+</head> 
+<body>
+    <div class="sidenav">
+        <a style = "padding-left:0px;" href="/"><div class="sidenav-title"> SecureProv </div></a>
+        <br>
+        <a href="/showData"> - Retrieve Transactions</a>
+        <a href="/addData"> - Insert Data</a>
+        <a href="/login"> - Login</a>
+        <a href="/register"> - Register</a>
+        {% if messages["loggedIn"] %}
+        <a href="/logout"><button> Logout </button></a>
+        {% endif %}
+
+    </div>
+    <div class="main">
+        
+        <h2>Register</h1>
+            <p>Register a new account using your email ID and password</p>
+            <form action = "http://localhost:5000/register" method = "POST" enctype = "multipart/form-data">
+                <label for="emailID">EmailID:</label>
+                <input type="text" id="emailID" name="emailID">
+                <br>
+                <br>
+                <label for="pass">Password: </label>
+                <input type="password" id="pass" name="pass">
+                <br>
+                <br>
+                <input value="Register" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>
+            </form>
+            <p>
+                <div id="loading" style="display:none;">
+                    <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" height="35px" width="35px">
+                </div>
+            </p>
+            <p>
+                {{messages['error']}}
+            </p>
+    </div>
+</body>
+</html>

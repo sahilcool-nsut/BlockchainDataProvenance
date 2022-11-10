@@ -15,14 +15,20 @@
         <br>
         <a href="/showData"> - Retrieve Transactions</a>
         <a href="/addData"> - Insert Data</a>
+        <a href="/login"> - Login</a>
+        <a href="/register"> - Register</a>
+        {% if messages["loggedIn"] %}
+        <a href="/logout"><button> Logout </button></a>
+        {% endif %}
+
     </div>
     <div class="main">
         
         <h2>Show Data</h1>
         <p>Retrieve Transaction Data stored on the Blockchain</p>
         <p>On pressing the button below, you can get the transaction data stored <b>live on the blockchain network</b></p>
-        <!-- <form action = "http://localhost:5000/getData" method = "GET" enctype = "multipart/form-data"> -->
-        <form action = "https://blockchain-dataprovenance.herokuapp.com/getData" method = "GET" enctype = "multipart/form-data">
+        <form action = "http://localhost:5000/getData" method = "GET" enctype = "multipart/form-data">
+        <!-- <form action = "https://blockchain-dataprovenance.herokuapp.com/getData" method = "GET" enctype = "multipart/form-data"> -->
             
             <br>
             <input value="Get Data" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>

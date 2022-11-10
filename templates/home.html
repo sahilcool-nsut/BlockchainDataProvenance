@@ -16,6 +16,12 @@
         <br>
         <a href="/showData"> - Retrieve Transactions</a>
         <a href="/addData"> - Insert Data</a>
+        <a href="/login"> - Login</a>
+        <a href="/register"> - Register</a>
+        <br>
+        {% if messages["loggedIn"] %}
+        <a href="/logout"><button> Logout </button></a>
+        {% endif %}
     </div>
     <div class="main">
         
