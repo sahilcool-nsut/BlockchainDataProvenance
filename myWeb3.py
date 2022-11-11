@@ -43,212 +43,343 @@ import json
 #     }
 # ]
 # contractAddress = "0x66c3Aa6F43061fa81380940Fc4Bd05809E7Ba2BE"
+# contractAbi = [
+# 	{
+# 		"inputs": [],
+# 		"name": "clearList",
+# 		"outputs": [],
+# 		"stateMutability": "nonpayable",
+# 		"type": "function"
+# 	},
+# 	{
+# 		"inputs": [
+# 			{
+# 				"internalType": "string",
+# 				"name": "eventt",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "timeStamp",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "dbName",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "clusterName",
+# 				"type": "string"
+# 			}
+# 		],
+# 		"name": "insertEntry",
+# 		"outputs": [],
+# 		"stateMutability": "payable",
+# 		"type": "function"
+# 	},
+# 	{
+# 		"inputs": [
+# 			{
+# 				"internalType": "string",
+# 				"name": "timeStamp",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "tHash",
+# 				"type": "string"
+# 			}
+# 		],
+# 		"name": "updateTransactionHash",
+# 		"outputs": [],
+# 		"stateMutability": "payable",
+# 		"type": "function"
+# 	},
+# 	{
+# 		"inputs": [
+# 			{
+# 				"internalType": "address",
+# 				"name": "userAddress",
+# 				"type": "address"
+# 			}
+# 		],
+# 		"name": "Sizee",
+# 		"outputs": [
+# 			{
+# 				"internalType": "uint256",
+# 				"name": "",
+# 				"type": "uint256"
+# 			}
+# 		],
+# 		"stateMutability": "view",
+# 		"type": "function"
+# 	},
+# 	{
+# 		"inputs": [
+# 			{
+# 				"internalType": "address",
+# 				"name": "",
+# 				"type": "address"
+# 			},
+# 			{
+# 				"internalType": "uint256",
+# 				"name": "",
+# 				"type": "uint256"
+# 			}
+# 		],
+# 		"name": "transactionData",
+# 		"outputs": [
+# 			{
+# 				"internalType": "string",
+# 				"name": "timeStp",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "DBName",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "ClusName",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "operation",
+# 				"type": "string"
+# 			},
+# 			{
+# 				"internalType": "string",
+# 				"name": "tranHash",
+# 				"type": "string"
+# 			}
+# 		],
+# 		"stateMutability": "view",
+# 		"type": "function"
+# 	}
+# ]
 contractAbi = [
-	{
-		"inputs": [],
-		"name": "clearList",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "eventt",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "timeStamp",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "dbName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "clusterName",
-				"type": "string"
-			}
-		],
-		"name": "insertEntry",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "timeStamp",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "tHash",
-				"type": "string"
-			}
-		],
-		"name": "updateTransactionHash",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			}
-		],
-		"name": "Sizee",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "transactionData",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "timeStp",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "DBName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "ClusName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "operation",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "tranHash",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	}
+    {
+        "inputs": [],
+        "name": "clearList",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "eventt",
+                                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "timeStamp",
+                                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "dbName",
+                                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "clusterName",
+                                "type": "string"
+            }
+        ],
+        "name": "insertEntry",
+        "outputs": [],
+        "stateMutability": "payable",
+                "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "timeStamp",
+                                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "tHash",
+                                "type": "string"
+            }
+        ],
+        "name": "updateTransactionHash",
+        "outputs": [],
+        "stateMutability": "payable",
+                "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "userAddress",
+                                "type": "address"
+            }
+        ],
+        "name": "Sizee",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                                "type": "uint256"
+            }
+        ],
+        "name": "transactionData",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "timeStp",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "DBName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "ClusName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "operation",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "tranHash",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
 ]
-contractAddress = "0xBE94fBAe396126c82e901F9ec302b2aE31Fd0fD3"
+contractAddress = "0xEada123C30a551A77d938A931710F9Ba37448168"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
+
 
 class CustomWeb3:
     def __init__(self):
-        self.webObject = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v3/b85e8248ce5548038da1ccb22100b77a"))
+        self.webObject = Web3(Web3.HTTPProvider(
+            "https://goerli.infura.io/v3/b85e8248ce5548038da1ccb22100b77a"))
         self.webObject.middleware_onion.inject(geth_poa_middleware, layer=0)
         print("Web3 is connected? : " + str(self.webObject.isConnected()))
-        self.provContract = self.webObject.eth.contract(address=contractAddress, abi=contractAbi)
-        
+        self.provContract = self.webObject.eth.contract(
+            address=contractAddress, abi=contractAbi)
 
-    def insertEventInSmartContract(self,data):
-    
-        operationType = str(data["operationType"])
-        timeStamp = str(data["clusterTime"]["$timestamp"]["t"])
-        dbUsed = str(data["ns"]["db"])
-        collectionUsed = str(data["ns"]["coll"])
-        print(operationType)
-        print(timeStamp)
-        print(dbUsed)
-        print(collectionUsed)
-        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39" 
-        nonce = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
-        gasPrice = self.webObject.eth.gasPrice
-        gasPriceHex = self.webObject.toHex(gasPrice)
-        # gasLimitHex = self.webObject.toHex(3000000)
+    def insertEventInSmartContract(self, data):
         try:
-            transaction = self.provContract.functions.insertEntry(operationType,timeStamp,dbUsed,collectionUsed).buildTransaction({
-                "gasPrice": gasPriceHex,
-                "from": userAddress,
-                "nonce":nonce
-            }) 
-            print("created transaction object")
-            signedTxn = self.webObject.eth.account.signTransaction(transaction, private_key=privateKey)
-            print("signed transaction")
-            transactionHash = self.webObject.eth.sendRawTransaction(signedTxn.rawTransaction)
-            print("sent transaction1")
-            print(type(transactionHash))
-            print(transactionHash)
-            print(self.webObject.toHex(transactionHash))
-            print(str(self.webObject.toHex(transactionHash)))
-            strTransactionHash = str(self.webObject.toHex(transactionHash))
-            print(type(strTransactionHash))
-            # Now create new transaction to store the transaction hash
-            # First get the index from the timestamp->index mapping
-            tx_receipt = self.webObject.eth.waitForTransactionReceipt(transactionHash, timeout=120, poll_latency=0.1)
-            self.updateHash(timeStamp,strTransactionHash)
+            operationType = str(data["operationType"])
+            timeStamp = str(data["clusterTime"]["$timestamp"]["t"])
+            dbUsed = str(data["ns"]["db"])
+            collectionUsed = str(data["ns"]["coll"])
+            print(operationType)
+            print(timeStamp)
+            print(dbUsed)
+            print(collectionUsed)
+            privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
+            nonce = self.webObject.eth.getTransactionCount(
+                userAddress)  # SC OWNER ADDR
+            gasPrice = self.webObject.eth.gasPrice
+            gasPriceHex = self.webObject.toHex(gasPrice)
+            # gasLimitHex = self.webObject.toHex(3000000)
+            try:
+                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed).buildTransaction({
+                    "gasPrice": gasPriceHex,
+                    "from": userAddress,
+                    "nonce": nonce
+                })
+                print("created transaction object")
+                signedTxn = self.webObject.eth.account.signTransaction(
+                    transaction, private_key=privateKey)
+                print("signed transaction")
+                transactionHash = self.webObject.eth.sendRawTransaction(
+                    signedTxn.rawTransaction)
+                print("sent transaction1")
+                print(type(transactionHash))
+                print(transactionHash)
+                print(self.webObject.toHex(transactionHash))
+                print(str(self.webObject.toHex(transactionHash)))
+                strTransactionHash = str(self.webObject.toHex(transactionHash))
+                print(type(strTransactionHash))
+                # Now create new transaction to store the transaction hash
+                # First get the index from the timestamp->index mapping
+                tx_receipt = self.webObject.eth.waitForTransactionReceipt(
+                    transactionHash, timeout=120, poll_latency=0.1)
+                self.updateHash(timeStamp, strTransactionHash)
+            except Exception as e:
+                print(e)
         except Exception as e:
             print(e)
-    def updateHash(self,timeStamp,strTransactionHash):
+
+    def updateHash(self, timeStamp, strTransactionHash):
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
-        nonce2 = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
-        transaction2 = self.provContract.functions.updateTransactionHash(timeStamp,strTransactionHash).buildTransaction({
+        nonce2 = self.webObject.eth.getTransactionCount(
+            userAddress)  # SC OWNER ADDR
+        transaction2 = self.provContract.functions.updateTransactionHash(timeStamp, strTransactionHash).buildTransaction({
             "gasPrice": gasPriceHex,
             "from": userAddress,
-            "nonce":nonce2
-        }) 
-        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39" 
+            "nonce": nonce2
+        })
+        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
         print("created transaction2 object")
-        signedTxn2 = self.webObject.eth.account.signTransaction(transaction2, private_key=privateKey)
+        signedTxn2 = self.webObject.eth.account.signTransaction(
+            transaction2, private_key=privateKey)
         print("signed transaction2")
-        transactionHash2 = self.webObject.eth.sendRawTransaction(signedTxn2.rawTransaction)
+        transactionHash2 = self.webObject.eth.sendRawTransaction(
+            signedTxn2.rawTransaction)
         print("sent transaction2")
         print(self.webObject.toHex(transactionHash2))
-        tx_receipt = self.webObject.eth.waitForTransactionReceipt(transactionHash2, timeout=120, poll_latency=0.1)
-
-        
+        tx_receipt = self.webObject.eth.waitForTransactionReceipt(
+            transactionHash2, timeout=120, poll_latency=0.1)
 
     def retrieveBlockChainData(self):
-        finalList=[]
+        finalList = []
         listLength = self.provContract.functions.Sizee(userAddress).call()
         print(listLength)
-        urlsList=[]
-        for i in range(0,listLength):
-            var = self.provContract.functions.transactionData(userAddress,i).call()
-            txHash = var[len(var)-1]        #Last entry is the hash
-            txLink = "https://rinkeby.etherscan.io/tx/" + txHash
-            urlsList.append(txLink)    
-            var.insert(0,i+1)
+        urlsList = []
+        for i in range(0, listLength):
+            var = self.provContract.functions.transactionData(
+                userAddress, i).call()
+            txHash = var[len(var)-1]  # Last entry is the hash
+            txLink = "https://goerli.etherscan.io/tx/" + txHash
+            urlsList.append(txLink)
+            var.insert(0, i+1)
             print(var)
             finalList.append(var)
         print(urlsList)
-        return finalList,urlsList
+        return finalList, urlsList
 
     def clearBlockChainData(self):
-        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39" 
-        nonce = self.webObject.eth.getTransactionCount(userAddress)  #SC OWNER ADDR
+        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
+        nonce = self.webObject.eth.getTransactionCount(
+            userAddress)  # SC OWNER ADDR
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
         # gasLimitHex = self.webObject.toHex(3000000)
@@ -256,15 +387,17 @@ class CustomWeb3:
             transaction = self.provContract.functions.clearList().buildTransaction({
                 "gasPrice": gasPriceHex,
                 "from": userAddress,
-                "nonce":nonce
-            }) 
+                "nonce": nonce
+            })
             print("created transaction object")
-            signedTxn = self.webObject.eth.account.signTransaction(transaction, private_key=privateKey)
+            signedTxn = self.webObject.eth.account.signTransaction(
+                transaction, private_key=privateKey)
             print("signed transaction")
-            transactionHash = self.webObject.eth.sendRawTransaction(signedTxn.rawTransaction)
+            transactionHash = self.webObject.eth.sendRawTransaction(
+                signedTxn.rawTransaction)
             print("sent transaction")
             print(self.webObject.toHex(transactionHash))
-            tx_receipt = self.webObject.eth.waitForTransactionReceipt(transactionHash, timeout=120, poll_latency=0.1)
+            tx_receipt = self.webObject.eth.waitForTransactionReceipt(
+                transactionHash, timeout=120, poll_latency=0.1)
         except Exception as e:
             print(e)
-

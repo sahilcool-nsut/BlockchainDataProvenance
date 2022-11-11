@@ -115,12 +115,13 @@ def insertDataDB():
 
 @app.route('/trigger-event', methods=['POST'])
 def trigger():
+    print("inside trigger-event")
     payload = request.data.decode('utf-8')
-
+    print("after payload")
     payloadObj = json.loads(payload)
-
+    print("after payloadObj")
     data = payloadObj['changeEvent']
-
+    print("after data")
     customWeb3.insertEventInSmartContract(data)
     # customWeb3.updateHash(data)
     return "ok ji"
