@@ -499,9 +499,15 @@ class CustomWeb3:
         print(self.webObject.toHex(transactionHash2))
         tx_receipt = self.webObject.eth.waitForTransactionReceipt(
             transactionHash2, timeout=120, poll_latency=0.1)
+        print("after tx_receipt")
         gas_price = self.webObject.eth.getTransaction(transactionHash2).gasPrice
+        print("gas price")
+        print(gas_price)
         gas_used = self.webObject.eth.getTransactionReceipt(transactionHash2).gasUsed
+        print("gasUsed")
+        print(gas_used)
         transactionCost += gas_price * gas_used
+        print("transaction cost")
         print("CONNECTING BACKEND MONGO")
         backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
         db = backendClient.get_database('backendDB')
