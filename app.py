@@ -66,11 +66,11 @@ def loginPage():
             return render_template('loginPage.html', messages={"error":message,"loggedIn": True if "email" in session else False})
 
 
-def updateBalance(transactionCost,dbID):
-    print(transactionCost)
-    print(dbID)
-    currentEntry = db.databasesLinked.find_one_and_update({"databaseID":dbID},{"$inc":{"balance":transactionCost}})
-    print(currentEntry)
+# def updateBalance(transactionCost,dbID):
+#     print(transactionCost)
+#     print(dbID)
+#     currentEntry = db.databasesLinked.find_one_and_update({"databaseID":dbID},{"$inc":{"balance":transactionCost}})
+#     print(currentEntry)
     
 
 def addDatabase(groupID,appID,trigID,emailID):
