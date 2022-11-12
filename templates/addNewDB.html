@@ -26,18 +26,10 @@
     </div>
     <div class="main">
         
-        <h2>Register</h1>
-            <p>Register a new account using your email ID and password</p>
-            <!-- <form action = "http://localhost:5000/register" method = "POST" enctype = "multipart/form-data"> -->
-            <form action = "https://blockchain-provenence.onrender.com/register" method = "POST" enctype = "multipart/form-data">
-                <label for="emailID">EmailID:</label>
-                <input type="text" id="emailID" name="emailID">
-                <br>
-                <br>
-                <label for="pass">Password: </label>
-                <input type="password" id="pass" name="pass">
-                <br>
-                <br>
+        <h2>Add new Database</h1>
+            <p>Add a new Database and link it to your email</p>
+            <!-- <form action = "http://localhost:5000/addNewDatabase" method = "POST" enctype = "multipart/form-data"> -->
+            <form action = "https://blockchain-provenence.onrender.com/addNewDatabase" method = "POST" enctype = "multipart/form-data">
                 <label for="groupID">Database GroupID:</label>
                 <input type="text" id="groupID" name="groupID">
                 <br>
@@ -50,7 +42,7 @@
                 <input type="text" id="triggerID" name="triggerID">
                 <br>
                 <br>
-                <input value="Register" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>
+                <input value="Add" type = "submit" onclick='document.getElementById("loading").style.display="block";'/>
             </form>
             <p>
                 <div id="loading" style="display:none;">

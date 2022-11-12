@@ -18,15 +18,34 @@
         <a href="/addData"> - Insert Data</a>
         <a href="/login"> - Login</a>
         <a href="/register"> - Register</a>
-        <br>
         {% if messages["loggedIn"] %}
+        <a href="/addNewDatabase"> - Add new DB</a>
         <a href="/logout"><button> Logout </button></a>
         {% endif %}
     </div>
     <div class="main">
         
         <h2>Data Provenance using Blockchain for Cloud Databases</h2>
-        
+        {% if messages["loggedIn"] %}
+        <p> Databases Linked: </p>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <th>No</th>
+                    <th>Database Unique ID</th>
+                    <th>Balance</th>
+                </thead>
+                <tbody>
+                  {% for row in messages['databases'] %}
+                  <tr>
+                  <td>{{ loop.index }}</td>
+                  {% for cell in row %}
+                    <td>{{ cell }}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+          </div>
+        {% endif %}
         
     </div>
 </body>
