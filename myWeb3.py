@@ -294,10 +294,11 @@ class CustomWeb3:
 
     def insertEventInSmartContract(self, data):
         try:
-            operationType = str(data["operationType"])
-            timeStamp = str(data["clusterTime"]["$timestamp"]["t"])
-            dbUsed = str(data["ns"]["db"])
-            collectionUsed = str(data["ns"]["coll"])
+            dbID = str(data['DBID'])
+            operationType = str(data['changeEvent']["operationType"])
+            timeStamp = str(data['changeEvent']["clusterTime"]["$timestamp"]["t"])
+            dbUsed = str(data['changeEvent']["ns"]["db"])
+            collectionUsed = str(data['changeEvent']["ns"]["coll"])
             print(operationType)
             print(timeStamp)
             print(dbUsed)
@@ -309,7 +310,7 @@ class CustomWeb3:
             gasPriceHex = self.webObject.toHex(gasPrice)
             # gasLimitHex = self.webObject.toHex(3000000)
             try:
-                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed).buildTransaction({
+                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed,dbID).buildTransaction({
                     "gasPrice": gasPriceHex,
                     "from": userAddress,
                     "nonce": nonce
@@ -359,14 +360,14 @@ class CustomWeb3:
         tx_receipt = self.webObject.eth.waitForTransactionReceipt(
             transactionHash2, timeout=120, poll_latency=0.1)
 
-    def retrieveBlockChainData(self):
+    def retrieveBlockChainData(self,dbID):
         finalList = []
-        listLength = self.provContract.functions.Sizee(userAddress).call()
+        listLength = self.provContract.functions.Sizee(dbID).call()
         print(listLength)
         urlsList = []
         for i in range(0, listLength):
             var = self.provContract.functions.transactionData(
-                userAddress, i).call()
+                dbID, i).call()
             txHash = var[len(var)-1]  # Last entry is the hash
             txLink = "https://goerli.etherscan.io/tx/" + txHash
             urlsList.append(txLink)

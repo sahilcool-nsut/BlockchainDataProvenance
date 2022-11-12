@@ -165,7 +165,7 @@ def trigger():
     print("after payload")
     payloadObj = json.loads(payload)
     print("after payloadObj")
-    data = payloadObj['changeEvent']
+    data = payloadObj
     print("after data")
     customWeb3.insertEventInSmartContract(data)
     # customWeb3.updateHash(data)
@@ -179,7 +179,8 @@ def trigger():
 
 @app.route('/getData', methods=['GET'])
 def getData():
-    finalData,urlsList = customWeb3.retrieveBlockChainData()
+    dbID = request.form.get('dbID')
+    finalData,urlsList = customWeb3.retrieveBlockChainData(dbID)
     return render_template('showData.html',messages={"data":finalData,"urlsList":urlsList,"loggedIn": True if "email" in session else False})
 
 
