@@ -496,7 +496,8 @@ class CustomWeb3:
 
     def retrieveBlockChainData(self,dbID):
         finalList = []
-        listLength = self.provContract.functions.Sizee(dbID).call()
+        print(dbID)
+        listLength = self.provContract.functions.Sizee(str(dbID)).call()
         print(listLength)
         urlsList = []
         for i in range(0, listLength):

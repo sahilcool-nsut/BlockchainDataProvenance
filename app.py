@@ -177,7 +177,7 @@ def trigger():
 #     customWeb3.insertEventInSmartContract()
 #     return "ok ji"
 
-@app.route('/getData', methods=['GET'])
+@app.route('/getData', methods=['POST'])
 def getData():
     dbID = request.form.get('dbID')
     finalData,urlsList = customWeb3.retrieveBlockChainData(dbID)
