@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
 import json
-
+from app import updateBalance
 # contractAbi = [
 #     {
 #         "inputs": [
@@ -466,13 +466,17 @@ class CustomWeb3:
                 # First get the index from the timestamp->index mapping
                 tx_receipt = self.webObject.eth.waitForTransactionReceipt(
                     transactionHash, timeout=120, poll_latency=0.1)
-                self.updateHash(timeStamp, strTransactionHash,dbID)
+                gas_price = self.webObject.eth.getTransaction(transactionHash).gasPrice
+                gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
+                transactionCost = gas_price * gas_used
+
+                self.updateHash(timeStamp, strTransactionHash,dbID,transactionCost)
             except Exception as e:
                 print(e)
         except Exception as e:
             print(e)
 
-    def updateHash(self, timeStamp, strTransactionHash,dbID):
+    def updateHash(self, timeStamp, strTransactionHash,dbID,transactionCost):
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
         nonce2 = self.webObject.eth.getTransactionCount(
@@ -493,6 +497,11 @@ class CustomWeb3:
         print(self.webObject.toHex(transactionHash2))
         tx_receipt = self.webObject.eth.waitForTransactionReceipt(
             transactionHash2, timeout=120, poll_latency=0.1)
+        gas_price = self.webObject.eth.getTransaction(transactionHash2).gasPrice
+        gas_used = self.webObject.eth.getTransactionReceipt(transactionHash2).gasUsed
+        transactionCost += gas_price * gas_used
+
+        updateBalance(transactionCost,dbID)
 
     def retrieveBlockChainData(self,dbID):
         finalList = []
