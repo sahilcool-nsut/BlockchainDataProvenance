@@ -497,8 +497,8 @@ class CustomWeb3:
             signedTxn2.rawTransaction)
         print("sent transaction2")
         print(self.webObject.toHex(transactionHash2))
-        # tx_receipt = self.webObject.eth.waitForTransactionReceipt(
-        #     transactionHash2, timeout=120, poll_latency=0.1)
+        tx_receipt = self.webObject.eth.waitForTransactionReceipt(
+            transactionHash2, timeout=120, poll_latency=1)
         print("after tx_receipt")
         gas_price = self.webObject.eth.getTransaction(transactionHash2).gasPrice
         print("gas price")
