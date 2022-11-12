@@ -161,125 +161,259 @@ import json
 # 		"type": "function"
 # 	}
 # ]
+# contractAbi = [
+#     {
+#         "inputs": [],
+#         "name": "clearList",
+#                 "outputs": [],
+#                 "stateMutability": "nonpayable",
+#                 "type": "function"
+#     },
+#     {
+#         "inputs": [
+#             {
+#                 "internalType": "string",
+#                 "name": "eventt",
+#                                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "timeStamp",
+#                                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "dbName",
+#                                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "clusterName",
+#                                 "type": "string"
+#             }
+#         ],
+#         "name": "insertEntry",
+#         "outputs": [],
+#         "stateMutability": "payable",
+#                 "type": "function"
+#     },
+#     {
+#         "inputs": [
+#             {
+#                 "internalType": "string",
+#                 "name": "timeStamp",
+#                                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "tHash",
+#                                 "type": "string"
+#             }
+#         ],
+#         "name": "updateTransactionHash",
+#         "outputs": [],
+#         "stateMutability": "payable",
+#                 "type": "function"
+#     },
+#     {
+#         "inputs": [
+#             {
+#                 "internalType": "address",
+#                 "name": "userAddress",
+#                                 "type": "address"
+#             }
+#         ],
+#         "name": "Sizee",
+#         "outputs": [
+#             {
+#                 "internalType": "uint256",
+#                 "name": "",
+#                 "type": "uint256"
+#             }
+#         ],
+#         "stateMutability": "view",
+#         "type": "function"
+#     },
+#     {
+#         "inputs": [
+#             {
+#                 "internalType": "address",
+#                 "name": "",
+#                                 "type": "address"
+#             },
+#             {
+#                 "internalType": "uint256",
+#                 "name": "",
+#                                 "type": "uint256"
+#             }
+#         ],
+#         "name": "transactionData",
+#         "outputs": [
+#             {
+#                 "internalType": "string",
+#                 "name": "timeStp",
+#                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "DBName",
+#                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "ClusName",
+#                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "operation",
+#                 "type": "string"
+#             },
+#             {
+#                 "internalType": "string",
+#                 "name": "tranHash",
+#                 "type": "string"
+#             }
+#         ],
+#         "stateMutability": "view",
+#         "type": "function"
+#     }
+# ]
 contractAbi = [
-    {
-        "inputs": [],
-        "name": "clearList",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "eventt",
-                                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "timeStamp",
-                                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "dbName",
-                                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "clusterName",
-                                "type": "string"
-            }
-        ],
-        "name": "insertEntry",
-        "outputs": [],
-        "stateMutability": "payable",
-                "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "timeStamp",
-                                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "tHash",
-                                "type": "string"
-            }
-        ],
-        "name": "updateTransactionHash",
-        "outputs": [],
-        "stateMutability": "payable",
-                "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "userAddress",
-                                "type": "address"
-            }
-        ],
-        "name": "Sizee",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                                "type": "uint256"
-            }
-        ],
-        "name": "transactionData",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "timeStp",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "DBName",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "ClusName",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "operation",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "tranHash",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "dbid",
+				"type": "string"
+			}
+		],
+		"name": "clearList",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "eventt",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "timeStamp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dbName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "clusterName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dbid",
+				"type": "string"
+			}
+		],
+		"name": "insertEntry",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "timeStamp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tHash",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dbid",
+				"type": "string"
+			}
+		],
+		"name": "updateTransactionHash",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "dbid",
+				"type": "string"
+			}
+		],
+		"name": "Sizee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "transactionData",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "timeStp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "DBName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ClusName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "operation",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tranHash",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ]
-contractAddress = "0xEada123C30a551A77d938A931710F9Ba37448168"
+contractAddress = "0x855D59913DD3b699747Cc59799Dc327a34A9DCE8"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 
@@ -332,18 +466,18 @@ class CustomWeb3:
                 # First get the index from the timestamp->index mapping
                 tx_receipt = self.webObject.eth.waitForTransactionReceipt(
                     transactionHash, timeout=120, poll_latency=0.1)
-                self.updateHash(timeStamp, strTransactionHash)
+                self.updateHash(timeStamp, strTransactionHash,dbID)
             except Exception as e:
                 print(e)
         except Exception as e:
             print(e)
 
-    def updateHash(self, timeStamp, strTransactionHash):
+    def updateHash(self, timeStamp, strTransactionHash,dbID):
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
         nonce2 = self.webObject.eth.getTransactionCount(
             userAddress)  # SC OWNER ADDR
-        transaction2 = self.provContract.functions.updateTransactionHash(timeStamp, strTransactionHash).buildTransaction({
+        transaction2 = self.provContract.functions.updateTransactionHash(timeStamp, strTransactionHash,dbID).buildTransaction({
             "gasPrice": gasPriceHex,
             "from": userAddress,
             "nonce": nonce2
