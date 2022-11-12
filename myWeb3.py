@@ -469,7 +469,7 @@ class CustomWeb3:
                 gas_price = self.webObject.eth.getTransaction(transactionHash).gasPrice
                 gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
                 transactionCost = gas_price * gas_used
-
+                print(transactionCost)
                 self.updateHash(timeStamp, strTransactionHash,dbID,transactionCost)
             except Exception as e:
                 print(e)
@@ -477,6 +477,8 @@ class CustomWeb3:
             print(e)
 
     def updateHash(self, timeStamp, strTransactionHash,dbID,transactionCost):
+        print(transactionCost)
+        print("inside UPDATE HASH2")
         gasPrice = self.webObject.eth.gasPrice
         gasPriceHex = self.webObject.toHex(gasPrice)
         nonce2 = self.webObject.eth.getTransactionCount(
@@ -500,13 +502,14 @@ class CustomWeb3:
         gas_price = self.webObject.eth.getTransaction(transactionHash2).gasPrice
         gas_used = self.webObject.eth.getTransactionReceipt(transactionHash2).gasUsed
         transactionCost += gas_price * gas_used
-
+        print("CONNECTING BACKEND MONGO")
         backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
         db = backendClient.get_database('backendDB')
         print(transactionCost)
         print(dbID)
         currentEntry = db.databasesLinked.find_one_and_update({"databaseID":dbID},{"$inc":{"balance":transactionCost}})
         print(currentEntry)
+        print("CURRENT ENTRY")
 
     def retrieveBlockChainData(self,dbID):
         finalList = []
