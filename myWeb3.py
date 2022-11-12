@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
+import pymongo
 import json
-from app import updateBalance
 # contractAbi = [
 #     {
 #         "inputs": [
@@ -501,7 +501,12 @@ class CustomWeb3:
         gas_used = self.webObject.eth.getTransactionReceipt(transactionHash2).gasUsed
         transactionCost += gas_price * gas_used
 
-        updateBalance(transactionCost,dbID)
+        backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
+        db = backendClient.get_database('backendDB')
+        print(transactionCost)
+        print(dbID)
+        currentEntry = db.databasesLinked.find_one_and_update({"databaseID":dbID},{"$inc":{"balance":transactionCost}})
+        print(currentEntry)
 
     def retrieveBlockChainData(self,dbID):
         finalList = []
