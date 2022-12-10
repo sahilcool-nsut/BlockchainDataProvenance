@@ -418,8 +418,8 @@ class CustomWeb3:
         return encrypted
     def insertEventInSmartContract(self, data):
         try:
-            ct = datetime.datetime.now()
-            print("starting time of blockchain insert", ct)
+            st = datetime.datetime.now()
+            print("starting time of blockchain insert", st)
             dbID = str(data['DBID'])
             operationType = str(data['changeEvent']["operationType"])
             timeStamp = str(data['changeEvent']["clusterTime"]["$timestamp"]["t"])
@@ -470,7 +470,9 @@ class CustomWeb3:
                 gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
                 transactionCost = gas_price * gas_used
                 print(transactionCost)
-                print("transaction 1 complete time - ", datetime.datetime.now())
+                et = datetime.datetime.now()
+                print("transaction 1 complete time - ", et )
+                print("Difference = ", et-st)
                 self.updateHash(timeStamp, strTransactionHash,dbID,transactionCost)
             except Exception as e:
                 print(e)
