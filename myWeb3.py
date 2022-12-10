@@ -469,7 +469,7 @@ class CustomWeb3:
                 # Now create new transaction to store the transaction hash
                 # First get the index from the timestamp->index mapping
                 tx_receipt = self.webObject.eth.waitForTransactionReceipt(
-                    transactionHash, timeout=120, poll_latency=0.1)
+                    transactionHash, timeout=120, poll_latency=1)
                 gas_price = self.webObject.eth.getTransaction(transactionHash).gasPrice
                 gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
                 transactionCost = gas_price * gas_used
