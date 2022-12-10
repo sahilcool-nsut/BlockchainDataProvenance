@@ -540,8 +540,9 @@ class CustomWeb3:
             print(var[0])
             print(var)
             txHash = db.transactionHashes.find_one({"databaseID":dbID,"timeStamp":var[0]})
+            print(txHash)
             # txHash = var[len(var)-1]  # Last entry is the hash
-            txLink = "https://goerli.etherscan.io/tx/" + txHash
+            txLink = "https://goerli.etherscan.io/tx/" + str(txHash["transactionHash"])
             urlsList.append(txLink)
             var.insert(0, i+1)
             print(var)
