@@ -544,6 +544,7 @@ class CustomWeb3:
             # txHash = var[len(var)-1]  # Last entry is the hash
             txLink = "https://goerli.etherscan.io/tx/" + str(txHash["transactionHash"])
             urlsList.append(txLink)
+            # Serial number for front end
             var.insert(0, i+1)
             print(var)
             finalList.append(var)
