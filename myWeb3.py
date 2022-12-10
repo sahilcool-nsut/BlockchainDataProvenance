@@ -530,7 +530,6 @@ class CustomWeb3:
         finalList = []
         print(dbID)
         listLength = self.provContract.functions.Sizee(str(dbID)).call()
-        print(listLength)
         urlsList = []
         for i in range(0, listLength):
             var = self.provContract.functions.transactionData(
@@ -538,9 +537,7 @@ class CustomWeb3:
             backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
             db = backendClient.get_database('backendDB')
             print(var[0])
-            print(var)
             txHash = db.transactionHashes.find_one({"databaseID":dbID,"timeStamp":var[0]})
-            print(txHash)
             # txHash = var[len(var)-1]  # Last entry is the hash
             txLink = "https://goerli.etherscan.io/tx/" + str(txHash["transactionHash"])
             urlsList.append(txLink)
