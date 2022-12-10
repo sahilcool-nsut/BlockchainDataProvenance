@@ -537,9 +537,10 @@ class CustomWeb3:
             backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
             db = backendClient.get_database('backendDB')
             print(var[0])
-            txHash = db.transactionHashes.find_one({"databaseID":dbID,"timeStamp":var[0]})
+            txHashObject = db.transactionHashes.find_one({"databaseID":dbID,"timeStamp":var[0]})
+            txHash = txHashObject["transactionHash"]
             # txHash = var[len(var)-1]  # Last entry is the hash
-            txLink = "https://goerli.etherscan.io/tx/" + str(txHash["transactionHash"])
+            txLink = "https://goerli.etherscan.io/tx/" + str(txHash)
             urlsList.append(txLink)
             var.append(txHash)
             # Serial number for front end
