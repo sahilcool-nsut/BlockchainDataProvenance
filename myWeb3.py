@@ -427,7 +427,7 @@ class CustomWeb3:
             collectionUsed = str(data['changeEvent']["ns"]["coll"])
             extraData=""
             if operationType == "insert":
-                extraData= str(data["fullDocument"])
+                extraData= str(data["changeEvent"]["fullDocument"])
             
             extraDataEncrypted = self.encryptData(extraData)
 
