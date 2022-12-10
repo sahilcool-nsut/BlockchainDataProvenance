@@ -67,7 +67,7 @@
                         {{ row|length }} -->
                         {% if loop.index == row|length-1 %}
                             {% if messages["loggedIn"] %}
-                                <th scope="col">Document Data</th>
+                                <th scope="col">{{col}}</th>
                             {% endif %}
                         {% else %}
                             {% if loop.index == row|length %}
