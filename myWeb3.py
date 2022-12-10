@@ -467,8 +467,8 @@ class CustomWeb3:
                 print(type(strTransactionHash))
                 # Now create new transaction to store the transaction hash
                 # First get the index from the timestamp->index mapping
-                tx_receipt = self.webObject.eth.waitForTransactionReceipt(
-                    transactionHash, timeout=120, poll_latency=0.1)
+                # tx_receipt = self.webObject.eth.waitForTransactionReceipt(
+                #     transactionHash, timeout=120, poll_latency=0.1)
                 gas_price = self.webObject.eth.getTransaction(transactionHash).gasPrice
                 gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
                 transactionCost = gas_price * gas_used
@@ -483,40 +483,43 @@ class CustomWeb3:
     def updateHash(self, timeStamp, strTransactionHash,dbID,transactionCost):
         print(transactionCost)
         print("inside UPDATE HASH2")
-        gasPrice = self.webObject.eth.gasPrice
-        gasPriceHex = self.webObject.toHex(gasPrice)
-        nonce2 = self.webObject.eth.getTransactionCount(
-            userAddress)  # SC OWNER ADDR
-        transaction2 = self.provContract.functions.updateTransactionHash(timeStamp, strTransactionHash,dbID).buildTransaction({
-            "gasPrice": gasPriceHex,
-            "from": userAddress,
-            "nonce": nonce2
-        })
-        privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
-        print("created transaction2 object")
-        signedTxn2 = self.webObject.eth.account.signTransaction(
-            transaction2, private_key=privateKey)
-        print("signed transaction2")
-        transactionHash2 = self.webObject.eth.sendRawTransaction(
-            signedTxn2.rawTransaction)
-        print("sent transaction2")
-        print(self.webObject.toHex(transactionHash2))
-        tx_receipt = self.webObject.eth.waitForTransactionReceipt(
-            transactionHash2, timeout=120, poll_latency=1)
-        print("after tx_receipt")
-        gas_price = self.webObject.eth.getTransaction(transactionHash2).gasPrice
-        print("gas price")
-        print(gas_price)
-        gas_used = self.webObject.eth.getTransactionReceipt(transactionHash2).gasUsed
-        print("gasUsed")
-        print(gas_used)
-        transactionCost += gas_price * gas_used
-        print("transaction cost")
-        print("CONNECTING BACKEND MONGO")
+        # gasPrice = self.webObject.eth.gasPrice
+        # gasPriceHex = self.webObject.toHex(gasPrice)
+        # nonce2 = self.webObject.eth.getTransactionCount(
+        #     userAddress)  # SC OWNER ADDR
+        # transaction2 = self.provContract.functions.updateTransactionHash(timeStamp, strTransactionHash,dbID).buildTransaction({
+        #     "gasPrice": gasPriceHex,
+        #     "from": userAddress,
+        #     "nonce": nonce2
+        # })
+        # privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
+        # print("created transaction2 object")
+        # signedTxn2 = self.webObject.eth.account.signTransaction(
+        #     transaction2, private_key=privateKey)
+        # print("signed transaction2")
+        # transactionHash2 = self.webObject.eth.sendRawTransaction(
+        #     signedTxn2.rawTransaction)
+        # print("sent transaction2")
+        # print(self.webObject.toHex(transactionHash2))
+        # tx_receipt = self.webObject.eth.waitForTransactionReceipt(
+        #     transactionHash2, timeout=120, poll_latency=1)
+        # print("after tx_receipt")
+        # gas_price = self.webObject.eth.getTransaction(transactionHash2).gasPrice
+        # print("gas price")
+        # print(gas_price)
+        # gas_used = self.webObject.eth.getTransactionReceipt(transactionHash2).gasUsed
+        # print("gasUsed")
+        # print(gas_used)
+        # transactionCost += gas_price * gas_used
+        # print("transaction cost")
+        # print("CONNECTING BACKEND MONGO")
+
         backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
         db = backendClient.get_database('backendDB')
         print(transactionCost)
         print(dbID)
+        hashEntry = db.transactionHashes.insert_one({"databaseID":dbID,"timeStamp":timeStamp,"transactionHash":strTransactionHash})
+        print(hashEntry)
         print("transaction 2 complete time - ", datetime.datetime.now())
         currentEntry = db.databasesLinked.find_one_and_update({"databaseID":dbID},{"$inc":{"balance":transactionCost}})
         print(currentEntry)
@@ -531,7 +534,10 @@ class CustomWeb3:
         for i in range(0, listLength):
             var = self.provContract.functions.transactionData(
                 dbID, i).call()
-            txHash = var[len(var)-1]  # Last entry is the hash
+            backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
+            db = backendClient.get_database('backendDB')
+            txHash = db.transactionHashes.find_one({"databaseID":dbID,"timeStamp":var[0]})
+            # txHash = var[len(var)-1]  # Last entry is the hash
             txLink = "https://goerli.etherscan.io/tx/" + txHash
             urlsList.append(txLink)
             var.insert(0, i+1)
