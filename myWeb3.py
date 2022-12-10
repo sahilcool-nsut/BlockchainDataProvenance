@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from web3 import Web3, HTTPProvider
 from web3.middleware import geth_poa_middleware
 import pymongo
+import datetime
 import json
 # contractAbi = [
 #     {
@@ -428,6 +429,8 @@ class CustomWeb3:
 
     def insertEventInSmartContract(self, data):
         try:
+            ct = datetime.datetime.now()
+            print("starting time of blockchain insert", ct)
             dbID = str(data['DBID'])
             operationType = str(data['changeEvent']["operationType"])
             timeStamp = str(data['changeEvent']["clusterTime"]["$timestamp"]["t"])
@@ -470,6 +473,7 @@ class CustomWeb3:
                 gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
                 transactionCost = gas_price * gas_used
                 print(transactionCost)
+                print("transaction 1 complete time - ", datetime.datetime.now())
                 self.updateHash(timeStamp, strTransactionHash,dbID,transactionCost)
             except Exception as e:
                 print(e)
@@ -513,6 +517,7 @@ class CustomWeb3:
         db = backendClient.get_database('backendDB')
         print(transactionCost)
         print(dbID)
+        print("transaction 2 complete time - ", datetime.datetime.now())
         currentEntry = db.databasesLinked.find_one_and_update({"databaseID":dbID},{"$inc":{"balance":transactionCost}})
         print(currentEntry)
         print("CURRENT ENTRY")
