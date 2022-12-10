@@ -331,29 +331,6 @@ contractAbi = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "timeStamp",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "tHash",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "dbid",
-				"type": "string"
-			}
-		],
-		"name": "updateTransactionHash",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
 				"name": "dbid",
 				"type": "string"
 			}
@@ -403,18 +380,13 @@ contractAbi = [
 				"internalType": "string",
 				"name": "operation",
 				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "tranHash",
-				"type": "string"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	}
 ]
-contractAddress = "0x855D59913DD3b699747Cc59799Dc327a34A9DCE8"
+contractAddress = "0x44795eE0009084ddf59728Bf5C1F7EA2005Bb2E7"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 
