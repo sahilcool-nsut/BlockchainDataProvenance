@@ -551,7 +551,7 @@ class CustomWeb3:
         print(urlsList)
         return finalList, urlsList
 
-    def clearBlockChainData(self):
+    def clearBlockChainData(self,dbID):
         privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
         nonce = self.webObject.eth.getTransactionCount(
             userAddress)  # SC OWNER ADDR
@@ -559,7 +559,7 @@ class CustomWeb3:
         gasPriceHex = self.webObject.toHex(gasPrice)
         # gasLimitHex = self.webObject.toHex(3000000)
         try:
-            transaction = self.provContract.functions.clearList().buildTransaction({
+            transaction = self.provContract.functions.clearList(dbID).buildTransaction({
                 "gasPrice": gasPriceHex,
                 "from": userAddress,
                 "nonce": nonce
