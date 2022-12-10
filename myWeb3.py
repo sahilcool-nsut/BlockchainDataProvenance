@@ -4,6 +4,7 @@ from web3.middleware import geth_poa_middleware
 import pymongo
 import datetime
 import json
+from cryptography.fernet import Fernet
 # contractAbi = [
 #     {
 #         "inputs": [
@@ -320,6 +321,11 @@ contractAbi = [
 				"internalType": "string",
 				"name": "dbid",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "EncrData",
+				"type": "string"
 			}
 		],
 		"name": "insertEntry",
@@ -380,13 +386,18 @@ contractAbi = [
 				"internalType": "string",
 				"name": "operation",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "EncryptData",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	}
 ]
-contractAddress = "0x44795eE0009084ddf59728Bf5C1F7EA2005Bb2E7"
+contractAddress = "0x1e32c68623F1030711659D032F2500D6f78B0a2e"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 
@@ -399,6 +410,12 @@ class CustomWeb3:
         self.provContract = self.webObject.eth.contract(
             address=contractAddress, abi=contractAbi)
 
+    def encryptData(self,data):
+        with open('key.key','rb') as file:
+            key = file.read()
+        fernet = Fernet(key)
+        encrypted = fernet.encrypt(data)
+        return encrypted
     def insertEventInSmartContract(self, data):
         try:
             ct = datetime.datetime.now()
@@ -408,10 +425,17 @@ class CustomWeb3:
             timeStamp = str(data['changeEvent']["clusterTime"]["$timestamp"]["t"])
             dbUsed = str(data['changeEvent']["ns"]["db"])
             collectionUsed = str(data['changeEvent']["ns"]["coll"])
+            extraDataJSON = {}
+            if operationType == "insert":
+                extraDataJSON = str(data["fullDocument"])
+            
+            extraDataJSONencrypted = self.encryptData(extraDataJSON)
+
             print(operationType)
             print(timeStamp)
             print(dbUsed)
             print(collectionUsed)
+            print(extraDataJSONencrypted)
             privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
             nonce = self.webObject.eth.getTransactionCount(
                 userAddress)  # SC OWNER ADDR
@@ -419,7 +443,7 @@ class CustomWeb3:
             gasPriceHex = self.webObject.toHex(gasPrice)
             # gasLimitHex = self.webObject.toHex(3000000)
             try:
-                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed,dbID).buildTransaction({
+                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed,dbID,extraDataJSONencrypted).buildTransaction({
                     "gasPrice": gasPriceHex,
                     "from": userAddress,
                     "nonce": nonce
@@ -514,9 +538,21 @@ class CustomWeb3:
             # txHash = var[len(var)-1]  # Last entry is the hash
             txLink = "https://goerli.etherscan.io/tx/" + str(txHash)
             urlsList.append(txLink)
+            # aDding transaction hash before the full document
+            # [timestamp,__,__,__,txHash,fullDocumentData]
             var.append(txHash)
             # Serial number for front end
             var.insert(0, i+1)
+
+            with open('key.key','rb') as file:
+                key = file.read()
+            print(key)
+            encryptedData = var[len(var)-2]
+            print(encryptedData)
+            fernet = Fernet(key)
+            decryptedData = fernet.decrypt(encryptedData)
+            print(decryptedData)
+            var[len(var)-2] = decryptedData
             print(var)
             finalList.append(var)
         print(urlsList)

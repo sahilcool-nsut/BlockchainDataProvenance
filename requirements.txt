@@ -12,3 +12,4 @@ web3
 pymongo[tls,srv]
 bcrypt
 datetime
+cryptography
