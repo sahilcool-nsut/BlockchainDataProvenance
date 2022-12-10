@@ -428,8 +428,10 @@ class CustomWeb3:
             extraDataJSON = {}
             if operationType == "insert":
                 extraDataJSON = str(data["fullDocument"])
+                extraDataJSON = json.loads(extraDataJSON)
+                extraDataBytes = bytes(extraDataJSON, 'utf-8')
             
-            extraDataJSONencrypted = self.encryptData(extraDataJSON)
+            extraDataJSONencrypted = self.encryptData(extraDataBytes)
 
             print(operationType)
             print(timeStamp)
