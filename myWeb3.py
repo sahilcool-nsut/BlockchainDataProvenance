@@ -414,7 +414,7 @@ class CustomWeb3:
         with open('key.key','rb') as file:
             key = file.read()
         fernet = Fernet(key)
-        encrypted = fernet.encrypt(data)
+        encrypted = fernet.encrypt(data.encode())
         return encrypted
     def insertEventInSmartContract(self, data):
         try:
@@ -425,19 +425,17 @@ class CustomWeb3:
             timeStamp = str(data['changeEvent']["clusterTime"]["$timestamp"]["t"])
             dbUsed = str(data['changeEvent']["ns"]["db"])
             collectionUsed = str(data['changeEvent']["ns"]["coll"])
-            extraDataJSON = {}
+            extraData=""
             if operationType == "insert":
-                extraDataJSON = str(data["fullDocument"])
-                extraDataJSON = json.loads(extraDataJSON)
-                extraDataBytes = bytes(extraDataJSON, 'utf-8')
+                extraData= str(data["fullDocument"])
             
-            extraDataJSONencrypted = self.encryptData(extraDataBytes)
+            extraDataEncrypted = self.encryptData(extraData)
 
             print(operationType)
             print(timeStamp)
             print(dbUsed)
             print(collectionUsed)
-            print(extraDataJSONencrypted)
+            print(extraDataEncrypted)
             privateKey = "60d5687eeb10f16d44d6c8c6510fd526a868ee10ff370458a31e9c6b39c28f39"
             nonce = self.webObject.eth.getTransactionCount(
                 userAddress)  # SC OWNER ADDR
@@ -445,7 +443,7 @@ class CustomWeb3:
             gasPriceHex = self.webObject.toHex(gasPrice)
             # gasLimitHex = self.webObject.toHex(3000000)
             try:
-                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed,dbID,extraDataJSONencrypted).buildTransaction({
+                transaction = self.provContract.functions.insertEntry(operationType, timeStamp, dbUsed, collectionUsed,dbID,extraDataEncrypted).buildTransaction({
                     "gasPrice": gasPriceHex,
                     "from": userAddress,
                     "nonce": nonce
@@ -552,7 +550,7 @@ class CustomWeb3:
             encryptedData = var[len(var)-2]
             print(encryptedData)
             fernet = Fernet(key)
-            decryptedData = fernet.decrypt(encryptedData)
+            decryptedData = fernet.decrypt(encryptedData).decode()
             print(decryptedData)
             var[len(var)-2] = decryptedData
             print(var)
