@@ -537,6 +537,8 @@ class CustomWeb3:
                 dbID, i).call()
             backendClient = pymongo.MongoClient("mongodb+srv://dbUser:test@blockchaintry.uyultsy.mongodb.net/?retryWrites=true&w=majority")
             db = backendClient.get_database('backendDB')
+            print(var[0])
+            print(var)
             txHash = db.transactionHashes.find_one({"databaseID":dbID,"timeStamp":var[0]})
             # txHash = var[len(var)-1]  # Last entry is the hash
             txLink = "https://goerli.etherscan.io/tx/" + txHash
