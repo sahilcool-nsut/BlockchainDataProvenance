@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Include Bootstrap and Custom CSS -->
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/customStyle.css') }}">
     
     <title>SecureProv</title>
@@ -25,7 +27,18 @@
 
     </div>
     <div class="main">
-        
+        {% if messages['dataAdded'] %}
+        <div class="alert alert-success alert-dismissible fade show">
+            <strong>Success!</strong> {{messages['dataAdded']}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
+        {% if messages['error'] %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>Error!</strong> {{messages['error']}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
         <h2>Register</h1>
             <p>Register a new account using your email ID and password</p>
             <!-- <form action = "http://localhost:5000/register" method = "POST" enctype = "multipart/form-data"> -->
@@ -56,9 +69,6 @@
                 <div id="loading" style="display:none;">
                     <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" height="35px" width="35px">
                 </div>
-            </p>
-            <p>
-                {{messages['error']}}
             </p>
     </div>
 </body>
