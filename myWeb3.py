@@ -461,7 +461,10 @@ class CustomWeb3:
                 print(str(self.webObject.toHex(transactionHash)))
                 strTransactionHash = str(self.webObject.toHex(transactionHash))
                 print(type(strTransactionHash))
-                print("Hash Completion Time - ", datetime.datetime.now())
+                print("Hash Completion Time - ", et)
+                et = datetime.datetime.now()
+                print("transaction 1 complete time - ", et )
+                print("Difference = ", et-st)
                 # Now create new transaction to store the transaction hash
                 # First get the index from the timestamp->index mapping
                 tx_receipt = self.webObject.eth.waitForTransactionReceipt(
@@ -470,9 +473,7 @@ class CustomWeb3:
                 gas_used = self.webObject.eth.getTransactionReceipt(transactionHash).gasUsed
                 transactionCost = gas_price * gas_used
                 print(transactionCost)
-                et = datetime.datetime.now()
-                print("transaction 1 complete time - ", et )
-                print("Difference = ", et-st)
+                
                 self.updateHash(timeStamp, strTransactionHash,dbID,transactionCost)
             except Exception as e:
                 print(e)
