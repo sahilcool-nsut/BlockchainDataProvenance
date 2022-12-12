@@ -41,8 +41,14 @@
         {% endif %}
         <h2>Add new Database</h1>
             <p>Add a new Database and link it to your email</p>
-            <form action = "http://localhost:5000/addNewDatabase" method = "POST" enctype = "multipart/form-data">
-            <!-- <form action = "https://blockchain-provenence.onrender.com/addNewDatabase" method = "POST" enctype = "multipart/form-data"> -->
+            <p>Once you add your database, you will get a Unique DBID associated to that database.</p>
+            <br>
+            <p>The trigger on your collection should hit on the api endpoint /trigger-event, which will be a POST request
+                <br>
+                It would require the changeEvent object, and the "DBID" which you are given here in JSON format.
+            </p>
+            <!-- <form action = "http://localhost:5000/addNewDatabase" method = "POST" enctype = "multipart/form-data"> -->
+            <form action = "https://blockchain-provenence.onrender.com/addNewDatabase" method = "POST" enctype = "multipart/form-data">
                 <label for="groupID">Database GroupID:</label>
                 <input type="text" id="groupID" name="groupID">
                 <br>
