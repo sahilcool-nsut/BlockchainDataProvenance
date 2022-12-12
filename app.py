@@ -101,7 +101,7 @@ def addNewDatabase():
             message = 'This database trigger is already linked'
             return render_template('addNewDB.html', messages={"error":message,"loggedIn": True if "email" in session else False})
         else:
-            return render_template('addNewDB.html', messages={"error":"Added Succesfully. Check in Homepage","loggedIn": True if "email" in session else False})
+            return render_template('addNewDB.html', messages={"dataAdded":"Added Succesfully. Check in Homepage","loggedIn": True if "email" in session else False})
 @app.route("/register", methods=['GET','POST'])
 def registerPage():
     if request.method == 'GET':
