@@ -187,6 +187,17 @@ def trigger():
 @app.route('/getData', methods=['POST'])
 def getData():
     dbID = request.form.get('dbID')
+
+    # check so that logged in user cant access any other user's database
+    loggedIn = True if "email" in session else False
+    if loggedIn:
+        currentEmail = session["email"]
+        databases= db.databasesLinked.find({"email":session["email"]})
+        print(databases)
+        dbIDs = [entry['databaseID'] for entry in databases]
+        if dbID not in dbIDs:
+            return render_template('showData.html',messages={"data":[],"urlsList":[],"loggedIn": True if "email" in session else False})
+    
     finalData,urlsList = customWeb3.retrieveBlockChainData(dbID)
     return render_template('showData.html',messages={"data":finalData,"urlsList":urlsList,"loggedIn": True if "email" in session else False})
 
