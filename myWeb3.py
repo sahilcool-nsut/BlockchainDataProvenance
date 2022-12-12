@@ -14,6 +14,25 @@ contractAbi = [
 				"type": "string"
 			}
 		],
+		"name": "Sizee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "dbid",
+				"type": "string"
+			}
+		],
 		"name": "clearList",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -61,25 +80,6 @@ contractAbi = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "dbid",
-				"type": "string"
-			}
-		],
-		"name": "Sizee",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
 				"name": "",
 				"type": "string"
 			},
@@ -121,7 +121,7 @@ contractAbi = [
 		"type": "function"
 	}
 ]
-contractAddress = "0x1e32c68623F1030711659D032F2500D6f78B0a2e"
+contractAddress = "0xAce3c9921f5b01aAF1019e67CcfB75f6269CA54a"
 userAddress = "0xE0f5Ef3120ad5d012112eca9792a151230C8cEab"
 
 
